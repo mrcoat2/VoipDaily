@@ -1,7 +1,7 @@
 from datetime import datetime, date
 from gcsa.google_calendar import GoogleCalendar
-import pyttsx3
 from voice import Voice
+import subprocess
 
 EMAIL = "yourbuddymrcoat@gmail.com"
 
@@ -20,7 +20,9 @@ def generate_script(events):
     _script = "You have " + str(num_events) + " events today. " + script_events
     script = _script.replace(" 0", " ")
     print(script)
-    Voice.say_to_wav(script)
+    wav = Voice.say_to_wav(script)
+
+    subprocess.run(["ffmpeg", "-i", wav, "-acodec pcm_s16le -ac 1 -ar 8000 /var/lib/asterisk/sounds/custom/wakeup-message.wav"])
 
 def main():
     calendar = GoogleCalendar(EMAIL)

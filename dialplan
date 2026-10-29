@@ -1,0 +1,26 @@
+
+[from-internal-custom]
+[wakeup-call]
+
+; Dial 262 to schedule a wake-up call
+exten => 262,1,Answer()
+ same => n,Set(TARGET=${FILTER(0-9,${CALLERID(num)})})
+ same => n,GotoIf($["${TARGET}" = ""]?invalid)
+ same => n,Playback(beep)
+ same => n,Read(WAKETIME,,4,,1,15)
+ same => n,GotoIf($[${LEN(${WAKETIME})} != 4]?invalid)
+ same => n,System(/usr/local/sbin/schedule-wakeup ${TARGET} ${WAKETIME})
+ same => n,Log(NOTICE, ${SYSTEMSTATUS})
+ same => n,GotoIf($["${SYSTEMSTATUS}" = "SUCCESS"]?success:invalid)
+
+ same => n(success),Playback(auth-thankyou)
+ same => n,Hangup()
+
+ same => n(invalid),Playback(pbx-invalid)
+ same => n,Hangup()
+
+; Context used when the scheduled call is answered
+exten => wakeup-playback,1,Answer()
+ same => n,Wait(1)
+ same => n,Playback(custom/wakeup-message)
+ same => n,Hangup()
