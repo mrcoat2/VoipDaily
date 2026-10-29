@@ -24,16 +24,10 @@ def generate_script(events):
 
     subprocess.run(["ffmpeg", "-i", wav, "-acodec pcm_s16le -ac 1 -ar 8000 /var/lib/asterisk/sounds/custom/wakeup-message.wav"])
 
-def main():
+def main(scheduled=date.today()):
     calendar = GoogleCalendar(EMAIL)
-    date_unf = date.today().isoformat()
-    date_today = {
-        "year": int(date_unf.split('-')[0]),
-        "month": int(date_unf.split('-')[1]),
-        "day": int(date_unf.split('-')[2])
-    }
     # Read events within a specific timeframe
-    events = calendar.get_events(time_min=datetime(date_today['year'], date_today['month'], date_today['day']), time_max=datetime(date_today['year'], date_today['month'], date_today['day']+1))
+    events = calendar.get_events(time_min=scheduled, time_max=scheduled + datetime.timedelta(days=1))
     generate_script(events)
 
 
