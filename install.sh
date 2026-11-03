@@ -3,6 +3,14 @@ if [ "$(id -u)" -ne 0 ]; then
     exec sudo "$0" "$@"
 fi
 
+if [[ "$1" == "remove" ]]; then
+    rm -rf /opt/VoipDaily
+    rm /usr/local/sbin/schedule-wakeup
+    exit 0
+else
+    echo "Installing"
+fi
+
 apt update -y
 apt install at ffmpeg git -y
 service atd start

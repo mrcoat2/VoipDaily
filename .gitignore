@@ -1,3 +1,6 @@
+en_US-amy-medium.onnx
+en_US-amy-medium.onnx.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
