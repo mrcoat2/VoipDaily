@@ -16,7 +16,7 @@ apt install at ffmpeg git -y
 service atd start
 mkdir -p /opt
 cd /opt
-git clone https://github.com/VoipDaily
+git clone https://github.com/mrcoat2/VoipDaily
 cd VoipDaily
 
 chmod a+rx schedule-wakeup.py
