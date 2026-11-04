@@ -56,7 +56,11 @@ def main():
     except (subprocess.SubprocessError, OSError):
         sys.exit(1)
 
-    print(f"Wake-up call scheduled for {scheduled:%Y-%m-%d %H:%M}")
+    date_format = "%Y-%m-%d %H:%M:%S"
+    dt_string = scheduled.strftime(date_format)
+    subprocess.run(["/opt/VoipDaily/bin/python","/opt/VoipDaily/main.py",dt_string])
+
+    print(f"Wake-up call scheduled for {scheduled:%Y-%m-%d+%H:%M}")
     sys.exit(0)
 
 if __name__ == "__main__":
