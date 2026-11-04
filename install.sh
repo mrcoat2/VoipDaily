@@ -16,6 +16,9 @@ apt install at ffmpeg git python3 -y
 service atd start
 mkdir -p /opt
 cd /opt
+
+rm -rf /opt/VoipDaily
+
 git clone https://github.com/mrcoat2/VoipDaily
 cd VoipDaily
 
