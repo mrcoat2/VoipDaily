@@ -11,8 +11,9 @@ else
     echo "Installing"
 fi
 
+add-apt-repository ppa:deadsnakes/ppa
 apt update -y
-apt install at ffmpeg git -y
+apt install at ffmpeg git python3.14 -y
 service atd start
 mkdir -p /opt
 cd /opt
@@ -32,6 +33,6 @@ fi
 curl -L https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/amy/medium/en_US-amy-medium.onnx?download=true -o /opt/VoipDaily/en_US-amy-medium.onnx
 curl -L https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/amy/medium/en_US-amy-medium.onnx.json?download=true -o /opt/VoipDaily/en_US-amy-medium.onnx.json
 
-python3 -m venv .
+python3.14 -m venv .
 source bin/activate
 pip install -r requirements.txt
