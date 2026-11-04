@@ -21,7 +21,7 @@ def generate_script(events):
     print(script)
     wav = Voice.say_to_wav(script)
 
-    subprocess.run(["ffmpeg", "-i", wav, "-acodec pcm_s16le -ac 1 -ar 8000 /var/lib/asterisk/sounds/custom/wakeup-message.wav"])
+    subprocess.run(["ffmpeg", "-i", wav, "-acodec", "pcm_s16le", "-ac", "1", "-ar", "8000", "/var/lib/asterisk/sounds/custom/wakeup-message.wav"])
 
 def main(scheduled=date.today()):
     calendar = GoogleCalendar()
