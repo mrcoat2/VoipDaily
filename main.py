@@ -1,4 +1,4 @@
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from gcsa.google_calendar import GoogleCalendar
 from voice import Voice
 import subprocess
@@ -24,12 +24,10 @@ def generate_script(events):
     subprocess.run(["ffmpeg", "-i", wav, "-acodec pcm_s16le -ac 1 -ar 8000 /var/lib/asterisk/sounds/custom/wakeup-message.wav"])
 
 def main(scheduled=date.today()):
-    calendar = GoogleCalendar(
-        calendar='primary',
-    )
+    calendar = GoogleCalendar()
 
     # Read events within a specific timeframe
-    events = calendar.get_events(time_min=scheduled, time_max=scheduled + datetime.timedelta(days=1))
+    events = calendar.get_events(time_min=scheduled, time_max=scheduled + timedelta(days=1))
     generate_script(events)
 
 
