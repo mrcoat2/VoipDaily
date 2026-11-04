@@ -25,6 +25,7 @@ cd VoipDaily
 chmod a+rx schedule-wakeup.py
 rm /usr/local/sbin/schedule-wakeup
 ln -s schedule-wakeup.py /usr/local/sbin/schedule-wakeup
+chmod a+rx /usr/local/sbin/schedule-wakeup
 
 if grep -q "\[wakeup-call\]" /etc/asterisk/extensions_custom.conf; then
     echo "Dialplan found!"
