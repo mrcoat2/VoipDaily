@@ -30,7 +30,7 @@ def main(scheduled=date.today()):
     generate_script(events)
 
 if __name__ == "__main__":
-    date_format = "%Y-%m-%d+%H:%M:%S"
+    date_format = "%Y-%m-%d %H:%M:%S"
     dt_back = 0
     if len(sys.argv) > 0:
         try:
