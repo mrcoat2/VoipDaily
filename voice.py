@@ -2,7 +2,7 @@ import wave
 from piper import PiperVoice
 
 # 1. Path to your downloaded ONNX model
-model_path = "en_US-amy-medium.onnx"
+model_path = "/opt/VoipDaily/en_US-amy-medium.onnx"
 
 # 2. Load the voice model
 voice = PiperVoice.load(model_path)
